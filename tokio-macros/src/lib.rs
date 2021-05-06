@@ -177,8 +177,11 @@ use proc_macro::TokenStream;
 /// available as `tokio` in the module where this macro is expanded.
 #[proc_macro_attribute]
 #[cfg(not(test))] // Work around for rust-lang/rust#62127
-pub fn main(args: TokenStream, item: TokenStream) -> TokenStream {
-    entry::main(args, item, true)
+pub fn main(args: TokenStream, input: TokenStream) -> TokenStream {
+    dbg!(&input);
+    let out = entry::main(args, input, true);
+    dbg!(&out);
+    out
 }
 
 /// Marks async function to be executed by selected runtime. This macro helps set up a `Runtime`
